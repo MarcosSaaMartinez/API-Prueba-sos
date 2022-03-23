@@ -1,38 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 const BASE_API_URL = "/api/v1";
 
 app.use(bodyParser.json());
 
 
-
-
-//#####################   Belén Rodríguez (belrodsal) ####################//
-//Get Y Post con datos Belén Rodríguez (belrodsal)
-var coalStats = [
-    {
-        country:"Spain",
-        milesTon:123456
-    },
-    {
-        country:"Australia",
-        milesTon:56789
-    }
-];
-
-app.get(BASE_API_URL+"/coalStats",(req,res)=>{
-    res.send(JSON.stringify(coalStats,null,2));
-});
-
-app.post(BASE_API_URL+"/coalStats",(req,res)=>{
-    coalStats.push(req.body);
-    res.sendStatus(201,"CREATED");
-});
-
 //##################### API marsaamar1 ####################//
-//Get Y Post 
+
 var tradeStats = [
     {		
         country : "Spain",
