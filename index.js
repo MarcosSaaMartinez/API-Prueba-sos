@@ -96,9 +96,14 @@ app.post(BASE_API_URL+"/trade-stats",(req,res)=>{
     res.sendStatus(201,"CREATED");
 });
 
-app.post(BASE_API_URL+"/trade-stats/loadInitialData",(req,res)=>{
+app.get(BASE_API_URL+"/trade-stats/loadInitialData",(req,res)=>{
     tradeStats.push(loadInitialDataTradeStats);
     res.sendStatus(201,"CREATED");
+});
+
+app.delete(BASE_API_URL+"/trade-stats", (req, res)=>{
+    tradeStats = [];
+    res.sendStatus(200,"OK");
 });
 
 //######################   API Jesús Vena Campos  ###############################//
