@@ -9,20 +9,80 @@ app.use(bodyParser.json());
 
 //##################### API marsaamar1 ####################//
 
+var loadInitialDataTradeStats = [
+    {		
+        country : "España",
+        year : 2018,
+        export : 293458.8,
+        import : 330635.8,
+        balance : -37177.1
+    },
+    {		
+        country : "Alemania",
+        year : 2018,
+        export : 1320732.4,
+        import : 1087431.3,
+        balance : 233301.1
+    },
+    {		
+        country : "Reino Unido",
+        year : 2018,
+        export : 412055.5,
+        import : 570546.8,
+        balance : -158491.3
+    },
+    {		
+        country : "Francia",
+        year : 2018,
+        export : 492964.1,
+        import : 572576.0,
+        balance : -79611.9
+    },
+    {		
+        country : "Italia",
+        year : 2018,
+        export : 465325.4,
+        import : 426045.7,
+        balance : 39279.7
+    }
+    
+];
+
 var tradeStats = [
     {		
-        country : "Spain",
-        year : 2020,
-        export : 500.817,
-        import : 21003.13,
-        balance : 423443.62
+        country : "España",
+        year : 2018,
+        export : 293458.8,
+        import : 330635.8,
+        balance : -37177.1
     },
-    {
-        country : "Italy",
-        year : 2017,
-        co2_tot : 2530.177,
-        co2_kg : 24430.15,
-        co2_tpc : 42234.77
+    {		
+        country : "Alemania",
+        year : 2018,
+        export : 1320732.4,
+        import : 1087431.3,
+        balance : 233301.1
+    },
+    {		
+        country : "Reino Unido",
+        year : 2018,
+        export : 412055.5,
+        import : 570546.8,
+        balance : -158491.3
+    },
+    {		
+        country : "Francia",
+        year : 2018,
+        export : 492964.1,
+        import : 572576.0,
+        balance : -79611.9
+    },
+    {		
+        country : "Italia",
+        year : 2018,
+        export : 465325.4,
+        import : 426045.7,
+        balance : 39279.7
     }
     
 ];
@@ -33,6 +93,11 @@ app.get(BASE_API_URL+"/trade-stats",(req,res)=>{
 
 app.post(BASE_API_URL+"/trade-stats",(req,res)=>{
     tradeStats.push(req.body);
+    res.sendStatus(201,"CREATED");
+});
+
+app.post(BASE_API_URL+"/trade-stats/loadInitialData",(req,res)=>{
+    tradeStats.push(loadInitialDataTradeStats);
     res.sendStatus(201,"CREATED");
 });
 
