@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 8081;
 const BASE_API_URL = "/api/v1";
+const API_DOC_TRADE = "https://documenter.getpostman.com/view/19585767/UVsTqhfQ";
 
 app.use(bodyParser.json());
 
@@ -102,8 +103,6 @@ app.get(BASE_API_URL+"/trade-stats/loadInitialData",(req,res)=>{
     }
 });
 
-
-
 app.get(BASE_API_URL+"/trade-stats/:country", (req, res)=>{
     var countryName = req.params.country;
     filteredCountries = tradeStats.filter((c)=>{
@@ -128,6 +127,11 @@ app.get(BASE_API_URL+"/trade-stats/:year", (req, res)=>{
         res.send(JSON.stringify(filteredYear[0],null,2));
     }
     res.sendStatus(200,"OK");
+});
+
+app.get(BASE_API_URL+"/trade-stats/docs",(req,res)=>{
+    res.redirect(API_DOC_TRADE);
+
 });
 
 //##### GET #####//
