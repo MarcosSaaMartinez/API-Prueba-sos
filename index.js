@@ -87,18 +87,10 @@ var tradeStats = [
     
 ];
 
+//##### GET #####//
+
 app.get(BASE_API_URL+"/trade-stats",(req,res)=>{
     res.send(JSON.stringify(tradeStats,null,2));
-});
-
-app.post(BASE_API_URL+"/trade-stats",(req,res)=>{
-    tradeStats.push(req.body);
-    res.sendStatus(201,"CREATED");
-});
-
-app.delete(BASE_API_URL+"/trade-stats", (req, res)=>{
-    tradeStats = [];
-    res.sendStatus(200,"OK");
 });
 
 app.get(BASE_API_URL+"/trade-stats/loadInitialData",(req,res)=>{
@@ -110,25 +102,51 @@ app.get(BASE_API_URL+"/trade-stats/loadInitialData",(req,res)=>{
     }
 });
 
+
+
+app.get(BASE_API_URL+"/trade-stats/:country", (req, res)=>{
+    var countryName = req.params.country;
+    filteredCountries = tradeStats.filter((c)=>{
+        return(c.country == countryName);
+    })
+    if(filteredCountries == 0){
+        res.sendStatus(404,"NOT FOUND");
+    }else{
+        res.send(JSON.stringify(filteredCountries,null,2));
+    }
+    res.sendStatus(200,"OK");
+});
+
+app.get(BASE_API_URL+"/trade-stats/:year", (req, res)=>{
+    var tradeYear = req.params.year;
+    filteredYear = tradeStats.filter((y)=>{
+        return(y.year == tradeYear);
+    })
+    if(filteredYear == 0){
+        res.sendStatus(404,"NOT FOUND");
+    }else{
+        res.send(JSON.stringify(filteredYear[0],null,2));
+    }
+    res.sendStatus(200,"OK");
+});
+
+//##### GET #####//
+
+app.post(BASE_API_URL+"/trade-stats",(req,res)=>{
+    tradeStats.push(req.body);
+    res.sendStatus(201,"CREATED");
+});
+
+app.delete(BASE_API_URL+"/trade-stats", (req, res)=>{
+    tradeStats = [];
+    res.sendStatus(200,"OK");
+});
+
+
+
 //######################   API Jesús Vena Campos  ###############################//
 
 
-var co2 = [
-    {		
-        country : "España",
-        year : 2020,
-        co2_tot : 214.817,
-        co2_kg : 0.13,
-        co2_tpc : 4.62
-    },
-    {
-        country : "Alemania",
-        year : 2017,
-        co2_tot : 250.177,
-        co2_kg : 0.15,
-        co2_tpc : 4.77
-    }
-];
 
 app.get(BASE_API_URL+"/co2-stats",(req,res)=>{
     res.send(JSON.stringify(co2,null,2));
